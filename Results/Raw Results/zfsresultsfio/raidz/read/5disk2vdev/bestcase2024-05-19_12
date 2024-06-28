@@ -1,0 +1,29 @@
+read: (g=0): rw=read, bs=(R) 1024KiB-1024KiB, (W) 1024KiB-1024KiB, (T) 1024KiB-1024KiB, ioengine=libaio, iodepth=1
+fio-3.28
+Starting 1 process
+read: Laying out IO file (1 file / 16384MiB)
+
+read: (groupid=0, jobs=1): err= 0: pid=810102: Mon May 20 11:19:11 2024
+  read: IOPS=469, BW=469MiB/s (492MB/s)(27.5GiB/60001msec)
+    slat (usec): min=459, max=134093, avg=2119.23, stdev=7376.99
+    clat (usec): min=3, max=944, avg= 5.46, stdev= 6.76
+     lat (usec): min=464, max=134109, avg=2126.29, stdev=7378.00
+    clat percentiles (usec):
+     |  1.00th=[    4],  5.00th=[    4], 10.00th=[    4], 20.00th=[    5],
+     | 30.00th=[    5], 40.00th=[    5], 50.00th=[    5], 60.00th=[    5],
+     | 70.00th=[    6], 80.00th=[    6], 90.00th=[    7], 95.00th=[   11],
+     | 99.00th=[   15], 99.50th=[   23], 99.90th=[   56], 99.95th=[   64],
+     | 99.99th=[  111]
+   bw (  KiB/s): min=235520, max=624640, per=100.00%, avg=480729.28, stdev=81895.13, samples=119
+   iops        : min=  230, max=  610, avg=469.46, stdev=79.98, samples=119
+  lat (usec)   : 4=11.40%, 10=82.87%, 20=5.19%, 50=0.39%, 100=0.14%
+  lat (usec)   : 250=0.01%, 1000=0.01%
+  cpu          : usr=0.75%, sys=43.69%, ctx=8798, majf=0, minf=266
+  IO depths    : 1=100.0%, 2=0.0%, 4=0.0%, 8=0.0%, 16=0.0%, 32=0.0%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=28146,0,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=1
+
+Run status group 0 (all jobs):
+   READ: bw=469MiB/s (492MB/s), 469MiB/s-469MiB/s (492MB/s-492MB/s), io=27.5GiB (29.5GB), run=60001-60001msec
