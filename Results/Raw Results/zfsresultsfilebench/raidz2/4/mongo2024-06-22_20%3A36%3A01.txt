@@ -1,0 +1,27 @@
+Filebench Version 1.5-alpha3
+0.000: Allocated 177MB of shared memory
+0.005: Mongo-like Version 2.3 personality successfully loaded
+0.215: Populating and pre-allocating filesets
+0.489: postsetdel populated: 300000 files, avg. dir. width = 20, avg. dir. depth = 4.2, 0 leafdirs, 4687.500MB total size
+0.489: Removing postsetdel tree (if exists)
+0.498: Pre-allocating directories in postsetdel tree
+2.001: Pre-allocating files in postsetdel tree
+148.665: postset populated: 300000 files, avg. dir. width = 20, avg. dir. depth = 4.2, 0 leafdirs, 4687.500MB total size
+148.666: Removing postset tree (if exists)
+148.670: Pre-allocating directories in postset tree
+150.032: Pre-allocating files in postset tree
+294.812: Waiting for pre-allocation to finish (in case of a parallel pre-allocation)
+294.832: Population and pre-allocation of filesets completed
+294.833: Starting 1 filereader instances
+295.849: Running...
+895.943: Run took 600 seconds...
+895.943: Per-Operation Breakdown
+deletefile1          13542ops       23ops/s   0.0mb/s    9.541ms/op [0.105ms - 230.885ms]
+closefile2           13543ops       23ops/s   0.0mb/s    0.007ms/op [0.005ms - 0.889ms]
+readfile1            13543ops       23ops/s   0.4mb/s   11.637ms/op [0.058ms - 207.568ms]
+openfile2            13543ops       23ops/s   0.0mb/s    5.740ms/op [0.016ms - 274.658ms]
+closefile1           13543ops       23ops/s   0.0mb/s    0.008ms/op [0.006ms - 1.001ms]
+appendfilerand1      13543ops       23ops/s   0.2mb/s   11.772ms/op [0.078ms - 242.550ms]
+openfile1            13543ops       23ops/s   0.0mb/s    5.538ms/op [0.019ms - 203.986ms]
+895.943: IO Summary: 94800 ops 157.975 ops/s 23/23 rd/wr   0.5mb/s 6.320ms/op
+895.943: Shutting down processes

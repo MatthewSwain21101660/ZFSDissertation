@@ -15,7 +15,8 @@ useCase=("bestcase" "generaluse" "worstcase")
 #Defining a list of the different dates of the files
 fileDate=("2024-05-15_12" "2024-05-17_12" "2024-05-19_12" "2024-05-21_12" "2024-05-23_12" "2024-05-25_12")
 
-echo "Config, Result" >> fioAveragedResults
+#Added headers for ease of manipulating data
+echo "Config, Result" >> fioAveragedResults.txt
 
 #A series of nested for loops to recurse through the directories
 for (( layoutCount=0;layoutCount<=5;layoutCount++ ))
@@ -25,7 +26,7 @@ do
     for (( diskNumberCount=0;diskNumberCount<=9;diskNumberCount++ ))
     do
       #First checks that the directory exits
-      if [  -d $HOME/results/zfsresultsfio/"${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[$diskNumberCount]}" ]
+      if [  -d /home/zfstest/results/zfsresultsfio/"${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[$diskNumberCount]}" ]
       then
         #Recurses through the different use cases
         for (( useCaseCount=0;useCaseCount<=2;useCaseCount++ ))
@@ -39,7 +40,7 @@ do
           for (( fileDateCount=0;fileDateCount<=5;fileDateCount++ ))
           do
             #Extracts the relevant information to a variable
-            extractedResult=$(cat $HOME/results/zfsresultsfio/${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}${fileDate[fileDateCount]} | grep -A11 "Run status")
+            extractedResult=$(cat /home/zfstest/results/zfsresultsfio/${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}${fileDate[fileDateCount]} | grep -A11 "Run status")
 
             #The rw and randrw tests provide both read and write results and so need to be handled differently
             if [ "$(echo $extractedResult | grep "READ")" ] && [ "$(echo $extractedResult | grep "WRITE")" ]
@@ -95,16 +96,16 @@ do
             rwWriteCaseAverage=$(echo "scale=3; $rwWriteCaseAverage / 6" | bc -l)
 
             #Outputs the averaged value
-            echo "${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]} Read"",""$rwReadCaseAverage" >> fioAveragedResults
-            echo "${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]} Write"",""$rwWriteCaseAverage" >> fioAveragedResults
+            echo "${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]} Read"",""$rwReadCaseAverage" >> fioAveragedResults,txt
+            echo "${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]} Write"",""$rwWriteCaseAverage" >> fioAveragedResults.txt
           elif [[ "$caseAverage" != 0 ]]
           then
             #Does the same as the above with just one value
             caseAverage=$(echo "scale=3; $caseAverage / 6"  | bc -l)
 
-            echo "${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}"",""$caseAverage" >> fioAveragedResults
+            echo "${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}"",""$caseAverage" >> fioAveragedResults.txt
           else
-           echo "Unknown average" >> fioAveragedResults
+           echo "Unknown average" >> fioAveragedResults.txt
           fi
         done
       fi

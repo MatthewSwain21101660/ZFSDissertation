@@ -1,7 +1,6 @@
 #! /bin/bash
 
-#zfsresultsfio/mirror
-
+#Arrays for the script to loop through and retrieve all results from the tests
 layout=("stripe" "mirror" "stripedmirror" "raidz" "raidz2" "raidz3")
 
 testType=("read" "write" "rw" "randread" "randwrite" "randrw")
@@ -19,15 +18,17 @@ do
   do
     for (( diskNumberCount=0;diskNumberCount<=9;diskNumberCount++ ))
     do
-      if [  -d $HOME/results/zfsresultsfio/"${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[$diskNumberCount]}" ]
+      #Checks if the directory exists before proceeding
+      if [  -d /home/zfstest/results/zfsresultsfio/"${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[$diskNumberCount]}" ]
       then
         for (( useCaseCount=0;useCaseCount<=2;useCaseCount++ ))
         do
-          printf "\n${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}\n" >> fioAggregatedResults
-
+          #Prints the current configuration to the file
+          printf "\n${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}\n" >> fioAggregatedResults.txt
           for ((  fileDateCount=0;fileDateCount<=5;fileDateCount++ ))
           do
-            cat $HOME/results/zfsresultsfio/${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}${fileDate[fileDateCount]} | grep -A11 "Run status" >> fioAggregatedResults
+            #Prints all 6 results to the file. Entire file is printed, then piped into grep to remove all but the results lines
+            cat /home/zfstest/results/zfsresultsfio/${layout[layoutCount]}/${testType[testTypeCount]}/${diskNumber[diskNumberCount]}/${useCase[useCaseCount]}${fileDate[fileDateCount]} | grep -A11 "Run status" >> fioAggregatedResults.txt
           done
         done
       fi
